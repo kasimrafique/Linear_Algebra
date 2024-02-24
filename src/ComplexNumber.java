@@ -79,6 +79,16 @@ public class ComplexNumber {
         return Math.PI + Math.atan(bi/a);
     }
 
+    public ComplexNumber additiveInverse(){
+        return ComplexNumber.rectangular(this.a*-1, this.bi*-1);
+    }
+
+    public ComplexNumber multiplicativeInverse(){
+        if (a == 0 && bi == 0) throw new RuntimeException("v = 0 has no inverse");
+
+        return ComplexNumber.rectangular(a/(a*a + bi*bi), -1*bi/(a*a + bi*bi));
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

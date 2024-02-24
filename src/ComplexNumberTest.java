@@ -89,6 +89,10 @@ class ComplexNumberTest {
         assert(ComplexNumber.rectangular(4,6).equals(ComplexNumber.sum(z1,z3)));
         //TO DO more tests
     }
+    @Test
+    void testMultiplicativeInverse(){
+//        TO DO
+    }
 
     @Test
     void whenInstantiatedInRectangularForm_thenHasCorrectArgument(){
