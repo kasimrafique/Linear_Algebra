@@ -44,6 +44,18 @@ public class ComplexNumber {
         return Math.sqrt(a * a + bi * bi);
     }
 
+
+    //Returns the positive root of the complex number
+    //        sqrt of imaginary number is imaginary
+    //        https://www.cuemath.com/algebra/square-root-of-complex-number/
+    public ComplexNumber sqrt(){
+        if ((bi == 0) && (a>=0)) return ComplexNumber.rectangular(Math.sqrt(a),0);
+        if ((bi == 0) && (a<0)) return ComplexNumber.rectangular(0, Math.sqrt(-a));
+
+        return ComplexNumber.rectangular(Math.sqrt(((this.modulus() + a)/2.0)),
+                (bi/Math.abs(bi))*Math.sqrt((this.modulus() - a)/2.0));
+    }
+
     public double argument() {
         if (Math.round(a) == 0 && bi > 0) return Math.PI / 2;
         if (Math.round(a) == 0 && bi < 0) return 3 * Math.PI / 2;

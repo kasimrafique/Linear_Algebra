@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/linear_algebra.iml" filepath="$PROJECT_DIR$/linear_algebra.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Linear_Algebra.iml" filepath="$PROJECT_DIR$/Linear_Algebra.iml" />
     </modules>
   </component>
 </project>
