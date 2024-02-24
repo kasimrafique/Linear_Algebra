@@ -42,6 +42,8 @@ class ComplexNumberTest {
         assertEquals(5, Math.round(ComplexNumber.product(z1,z2,z3).imaginaryPart()));
         assertEquals(-5,Math.round(ComplexNumber.product(z1,z3).realPart()));
         assertEquals(10, Math.round(ComplexNumber.product(z1,z3).imaginaryPart()));
+        assertEquals(0, Math.round(ComplexNumber.product(z1,z2,ComplexNumber.ZERO,z3).realPart()));
+        assertEquals(0, Math.round(ComplexNumber.product(z1,z2,ComplexNumber.ZERO,z3).imaginaryPart()));
     }
     @Test
     void testModulusOfComplexNumbers() {
@@ -87,28 +89,32 @@ class ComplexNumberTest {
         assert(ComplexNumber.rectangular(6,9).equals(ComplexNumber.sum(z1,z2,z3)));
         assert(ComplexNumber.rectangular(3,5).equals(ComplexNumber.sum(z1,z2)));
         assert(ComplexNumber.rectangular(4,6).equals(ComplexNumber.sum(z1,z3)));
+        assert(ComplexNumber.rectangular(4,6).equals(ComplexNumber.sum(z1,z3,ComplexNumber.ZERO)));
+        assert(ComplexNumber.ZERO.equals(ComplexNumber.sum(ComplexNumber.ZERO)));
         //TO DO more tests
     }
     @Test
     void testMultiplicativeInverse(){
-//        TO DO
+
     }
 
     @Test
     void whenInstantiatedInRectangularForm_thenHasCorrectArgument(){
         ComplexNumber z1 = ComplexNumber.rectangular(1, 1);
-        assertEquals(Math.PI / 4, z1.argument(), 0.001);
+        assertEquals(Math.PI / 4, z1.argument().orElseThrow(), 0.001);
 
         ComplexNumber z2 = ComplexNumber.rectangular(-1, 1);
-        assertEquals(3 * Math.PI / 4, z2.argument(), 0.001);
+        assertEquals(3 * Math.PI / 4, z2.argument().orElse(-1.0), 0.001);
 
         ComplexNumber z3 = ComplexNumber.polar(1, 3 * Math.PI / 2);
-        assertEquals(3 * Math.PI / 2, z3.argument(), 0.001);
+        assertEquals(3 * Math.PI / 2, z3.argument().orElse(-1.0), 0.001);
 
         ComplexNumber z4 = ComplexNumber.rectangular(-3, 4);
-        assertEquals(2.2143, z4.argument(), 0.001);
+        assertEquals(2.2143, z4.argument().orElse(-1.0), 0.001);
 
-        assertEquals(5.878, ComplexNumber.rectangular(7,-3).argument(), 0.01);
+        assertEquals(5.878, ComplexNumber.rectangular(7,-3).argument().orElse(-1.0), 0.01);
+
+        assertEquals(-1, ComplexNumber.rectangular(0,0).argument().orElse(-1.0));
     }
 
 

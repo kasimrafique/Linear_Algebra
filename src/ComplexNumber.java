@@ -1,8 +1,11 @@
+import java.util.Optional;
+
 public class ComplexNumber {
     private final double a;
     private final double bi;
 
     public static final ComplexNumber MULTIPLICATIVE_IDENTITY = new ComplexNumber(1, 0);
+    public static final ComplexNumber ZERO = new ComplexNumber(0, 0);
 
     private ComplexNumber(double a, double bi) {
         this.a = a;
@@ -18,7 +21,7 @@ public class ComplexNumber {
     }
 
     public static ComplexNumber sum(ComplexNumber... zs) {
-        var res = ComplexNumber.rectangular(0,0);
+        var res = ZERO;
 
         for (var z : zs){
             res = ComplexNumber.rectangular(res.a + z.a, res.bi + z.bi);
@@ -30,7 +33,9 @@ public class ComplexNumber {
         var prod = ComplexNumber.MULTIPLICATIVE_IDENTITY;
 
         for (var z : zs) {
-            prod = ComplexNumber.polar(prod.modulus() * z.modulus(), prod.argument() + z.argument());
+            if (ZERO.equals(z)) return ZERO;
+            //can use orElseThrow as argument should always be defined and z is checked for multiplying by 0
+            prod = ComplexNumber.polar(prod.modulus() * z.modulus(), prod.argument().orElseThrow() + z.argument().orElseThrow());
         }
 
         return prod;
@@ -66,27 +71,31 @@ public class ComplexNumber {
                 (bi/Math.abs(bi))*Math.sqrt((this.modulus() - a)/2.0));
     }
 
-    public double argument() {
-        if (a == 0 && bi == 0) throw new RuntimeException("Argument of 0 is undefined");
-        if (Math.round(a) == 0 && bi > 0) return Math.PI / 2;
-        if (Math.round(a) == 0 && bi < 0) return 3 * Math.PI / 2;
-        if (Math.round(a) > 0 && bi == 0) return 0;
-        if (Math.round(a) < 0 && bi == 0) return Math.PI;
+//    argument of complex number between 0 - 2Pi i.e. not negative
+    public Optional<Double> argument() {
+        if (a == 0 && bi == 0) return Optional.empty();
+        double r=0.0;
+        if (Math.round(a) == 0 && bi > 0) r = Math.PI / 2;
+        if (Math.round(a) == 0 && bi < 0) r = 3 * Math.PI / 2;
+        if (Math.round(a) > 0 && bi == 0) r = 0.0;
+        if (Math.round(a) < 0 && bi == 0) r = Math.PI;
 
-        if (a > 0 && bi > 0) return Math.atan(bi / a);
-        if (a < 0 && bi > 0) return Math.PI - Math.atan(bi / -a);
-        if (a > 0 && bi < 0) return 2*Math.PI - Math.atan(-bi / a);
-        return Math.PI + Math.atan(bi/a);
+        if (a > 0 && bi > 0) r = Math.atan(bi / a);
+        if (a < 0 && bi > 0) r = Math.PI - Math.atan(bi / -a);
+        if (a > 0 && bi < 0) r = 2*Math.PI - Math.atan(-bi / a);
+        if (a < 0 && bi < 0) r = Math.PI + Math.atan(bi/a);
+
+        return Optional.of(r);
     }
 
     public ComplexNumber additiveInverse(){
         return ComplexNumber.rectangular(this.a*-1, this.bi*-1);
     }
 
-    public ComplexNumber multiplicativeInverse(){
-        if (a == 0 && bi == 0) throw new RuntimeException("v = 0 has no inverse");
+    public Optional<ComplexNumber> multiplicativeInverse(){
+        if (a == 0 && bi == 0) return Optional.empty();
 
-        return ComplexNumber.rectangular(a/(a*a + bi*bi), -1*bi/(a*a + bi*bi));
+        return Optional.of(ComplexNumber.rectangular(a/(a*a + bi*bi), -1*bi/(a*a + bi*bi)));
     }
 
     @Override
