@@ -30,6 +30,10 @@ public class Vector {
         return dotProd;
     }
 
+    public ComplexNumber getComponent(int i) {
+        return components.get(i - 1);
+    }
+
     public double norm() {
         return Math.sqrt(
                 components.stream()
