@@ -33,7 +33,7 @@ public class Vector {
                         .sum());
     }
 
-    public double dimension() {
+    public int dimension() {
         return components.size();
     }
 }
