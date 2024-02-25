@@ -27,10 +27,6 @@ public class ComplexNumber {
        return new ComplexNumber(modulus * Math.cos(argument), modulus * Math.sin(argument));
     }
 
-    public static ComplexNumber real(double a) {
-        return ComplexNumber.rectangular(a, 0);
-    }
-
     public static ComplexNumber sum(ComplexNumber... zs) {
         return Arrays.stream(zs).reduce(
                 ComplexNumber.ADDITIVE_IDENTITY,
