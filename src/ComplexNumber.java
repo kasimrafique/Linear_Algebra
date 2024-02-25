@@ -12,6 +12,10 @@ public class ComplexNumber {
         this.bi = bi;
     }
 
+    public static ComplexNumber real(double x) {
+        return new ComplexNumber(x, 0);
+    }
+
     public static ComplexNumber rectangular(double a, double bi) {
         return new ComplexNumber(a, bi);
     }
