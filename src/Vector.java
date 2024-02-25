@@ -1,11 +1,16 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Objects;
 
 public class Vector {
     private final ArrayList<ComplexNumber> components;
 
     public Vector(ComplexNumber... c) {
         this.components = new ArrayList<>(Arrays.asList(c));
+    }
+
+    public static Vector fromReals(double... cs) {
+        return new Vector(Arrays.stream(cs).mapToObj(ComplexNumber::real).toArray(ComplexNumber[]::new));
     }
 
     public static ComplexNumber innerProduct(Vector v1, Vector v2) {
