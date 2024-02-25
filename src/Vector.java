@@ -36,4 +36,17 @@ public class Vector {
     public int dimension() {
         return components.size();
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Vector vector = (Vector) o;
+        return Objects.equals(components, vector.components);
+    }
+
+    @Override
+    public String toString() {
+        return "Vector{" + components + '}';
+    }
 }
