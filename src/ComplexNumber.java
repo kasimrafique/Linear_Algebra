@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Optional;
 
 public class ComplexNumber {
@@ -6,6 +7,8 @@ public class ComplexNumber {
 
     public static final ComplexNumber MULTIPLICATIVE_IDENTITY = new ComplexNumber(1, 0);
     public static final ComplexNumber ZERO = new ComplexNumber(0, 0);
+
+    public static final ComplexNumber ADDITIVE_IDENTITY = ZERO;
 
     private ComplexNumber(double a, double bi) {
         this.a = a;
@@ -25,24 +28,17 @@ public class ComplexNumber {
     }
 
     public static ComplexNumber sum(ComplexNumber... zs) {
-        var res = ZERO;
-
-        for (var z : zs){
-            res = ComplexNumber.rectangular(res.a + z.a, res.bi + z.bi);
-        }
-        return res;
+        return Arrays.stream(zs).reduce(
+                ComplexNumber.ADDITIVE_IDENTITY,
+                (sum, z) -> ComplexNumber.rectangular(sum.a + z.a, sum.bi + z.bi)
+        );
     }
 
     public static ComplexNumber product(ComplexNumber... zs) {
-        var prod = ComplexNumber.MULTIPLICATIVE_IDENTITY;
-
-        for (var z : zs) {
-            if (ZERO.equals(z)) return ZERO;
-            //can use orElseThrow as argument should always be defined and z is checked for multiplying by 0
-            prod = ComplexNumber.polar(prod.modulus() * z.modulus(), prod.argument().orElseThrow() + z.argument().orElseThrow());
-        }
-
-        return prod;
+        return Arrays.stream(zs).reduce(
+                ComplexNumber.MULTIPLICATIVE_IDENTITY,
+                (prod, z) -> ComplexNumber.rectangular(prod.a * z.a - prod.bi * z.bi, prod.a * z.bi + prod.bi * z.a)
+        );
     }
 
     public double realPart() {
