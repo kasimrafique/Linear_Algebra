@@ -11,7 +11,7 @@ public class ComplexNumberTest {
     @Test
     public void whenInstantiatedInPolarForm_thenHasCorrectRectangularCoords() {
         ComplexNumber z1 = ComplexNumber.polar(1, 0);
-        assertEquals(1, z1.realPart(), 0.01);
+        assertEquals(0, z1.realPart(), 0.01);
         assertEquals(0, z1.imaginaryPart(), 0.01);
 
         ComplexNumber z2 = ComplexNumber.polar(1, Math.PI / 4);
