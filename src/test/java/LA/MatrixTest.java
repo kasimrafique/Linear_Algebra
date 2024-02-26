@@ -1,14 +1,20 @@
-import org.junit.jupiter.api.Test;
+package LA;
+
+import org.junit.experimental.runners.Enclosed;
 import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
+@RunWith(Enclosed.class)
 class MatrixTest {
 
     @Nested
-    class Constructor {
+    public class Constructor {
         @Test
-        void givenColumnVectorsOfVaryingDimension_thenThrowException() {
+        public void givenColumnVectorsOfVaryingDimension_thenThrowException() {
             assertThrows(IllegalArgumentException.class, () -> Matrix.fromColumns(
                     new Vector(
                             ComplexNumber.real(1)
@@ -20,7 +26,7 @@ class MatrixTest {
         }
 
         @Test
-        void givenASquareMatrix_thenInstantiate() {
+        public void givenASquareMatrix_thenInstantiate() {
             Matrix a = Matrix.fromColumns(
                             new Vector(
                                     ComplexNumber.real(1),
@@ -37,7 +43,7 @@ class MatrixTest {
 
 
         @Test
-        void givenARectangularMatrix_thenInstantiate() {
+        public void givenARectangularMatrix_thenInstantiate() {
             Matrix a = Matrix.fromColumns(
                     new Vector(
                             ComplexNumber.real(1),
@@ -58,7 +64,7 @@ class MatrixTest {
 
 
     @Nested
-    class Transpose {
+    public class Transpose {
         @Test
         public void givenASquareMatrix_thenReturnItsTranspose() {
             Matrix a = Matrix.fromRows(
@@ -76,7 +82,7 @@ class MatrixTest {
     }
 
     @Nested
-    class GetRow {
+    public class GetRow {
         @Test
         public void givenAMatrix_thenReturnTheRequestedRow() {
         Matrix a = Matrix.fromColumns(

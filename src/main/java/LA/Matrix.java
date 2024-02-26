@@ -1,3 +1,5 @@
+package LA;
+
 import java.util.Arrays;
 
 public class Matrix {
@@ -61,7 +63,7 @@ public class Matrix {
 
     @Override
     public String toString() {
-        return "Matrix{" +
+        return "LA.Matrix{" +
                 "rows=" + Arrays.toString(getRows()) +
                 '}';
     }

@@ -1,3 +1,5 @@
+package LA;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
@@ -56,6 +58,6 @@ public class Vector {
 
     @Override
     public String toString() {
-        return "Vector{" + components + '}';
+        return "LA.Vector{" + components + '}';
     }
 }

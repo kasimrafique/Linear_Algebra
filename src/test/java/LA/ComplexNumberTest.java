@@ -1,12 +1,15 @@
-import static org.junit.jupiter.api.Assertions.assertEquals;
+package LA;
+
 import org.junit.jupiter.api.Test;
-
 import java.util.ArrayList;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-class ComplexNumberTest {
+
+public class ComplexNumberTest {
 
     @Test
-    void whenInstantiatedInPolarForm_thenHasCorrectRectangularCoords() {
+    public void whenInstantiatedInPolarForm_thenHasCorrectRectangularCoords() {
         ComplexNumber z1 = ComplexNumber.polar(1, 0);
         assertEquals(1, z1.realPart(), 0.01);
         assertEquals(0, z1.imaginaryPart(), 0.01);
@@ -32,7 +35,7 @@ class ComplexNumberTest {
         assertEquals(-1, z6.imaginaryPart(), 0.01);
     }
     @Test
-    void testProductOfComplexNumbers() {
+    public void testProductOfComplexNumbers() {
         var z1 = ComplexNumber.rectangular(1,2);
         var z2 = ComplexNumber.rectangular(2,3);
         var z3 = ComplexNumber.rectangular(3,4);
@@ -46,7 +49,7 @@ class ComplexNumberTest {
         assertEquals(0, Math.round(ComplexNumber.product(z1,z2,ComplexNumber.ZERO,z3).imaginaryPart()));
     }
     @Test
-    void testModulusOfComplexNumbers() {
+    public void testModulusOfComplexNumbers() {
         assertEquals(5, ComplexNumber.rectangular(3,4).modulus(), 0.001);
         assertEquals(10, ComplexNumber.polar(10, 0).modulus(), 0.001);
         assertEquals(39, ComplexNumber.rectangular(15,36).modulus(), 0.001);
@@ -55,7 +58,7 @@ class ComplexNumberTest {
     }
 
     @Test
-    void testSqrtOfComplexNumbers() {
+    public void testSqrtOfComplexNumbers() {
         assert(ComplexNumber.rectangular(1,2).equals(ComplexNumber.rectangular(-3,4).sqrt()));
         assert(ComplexNumber.rectangular(0,3).equals(ComplexNumber.rectangular(-9,0).sqrt()));
         assert(ComplexNumber.rectangular(Math.sqrt(2),0)).equals((ComplexNumber.rectangular(2,0).sqrt()));
@@ -66,8 +69,9 @@ class ComplexNumberTest {
         assert(ComplexNumber.rectangular(2,7).equals(ComplexNumber.rectangular(-45,28).sqrt()));
     }
 
+    @SuppressWarnings("EqualsBetweenInconvertibleTypes")
     @Test
-    void testEquals(){
+    public void testEquals(){
         ComplexNumber a = ComplexNumber.rectangular(3,4);
         assert(!ComplexNumber.rectangular(1,2).equals(a));
         ComplexNumber b = ComplexNumber.rectangular(4.6,1);
@@ -75,14 +79,12 @@ class ComplexNumberTest {
         assert(!b.equals(new ArrayList<String>()));
 
 //        Problem with rounding when comparing - these 2 are identical but doesn't match due to way of implementation
-//        System.out.println(a.toString() + ComplexNumber.polar(5, Math.atan(4.0/3.0)).toString());
-//        assert(a.equals(ComplexNumber.polar(5, Math.atan(4.0/3.0))));
         assertEquals(3,Math.round(ComplexNumber.polar(5, Math.atan(4.0/3.0)).realPart()));
         assertEquals(4, Math.round(ComplexNumber.polar(5, Math.atan(4.0/3.0)).imaginaryPart()));
     }
 
     @Test
-    void testSumOfComplexNumbers(){
+    public void testSumOfComplexNumbers(){
         var z1 = ComplexNumber.rectangular(1,2);
         var z2 = ComplexNumber.rectangular(2,3);
         var z3 = ComplexNumber.rectangular(3,4);
@@ -94,12 +96,12 @@ class ComplexNumberTest {
         //TO DO more tests
     }
     @Test
-    void testMultiplicativeInverse(){
+    public void testMultiplicativeInverse(){
 
     }
 
     @Test
-    void whenInstantiatedInRectangularForm_thenHasCorrectArgument(){
+    public void whenInstantiatedInRectangularForm_thenHasCorrectArgument(){
         ComplexNumber z1 = ComplexNumber.rectangular(1, 1);
         assertEquals(Math.PI / 4, z1.argument().orElseThrow(), 0.001);
 
@@ -114,7 +116,7 @@ class ComplexNumberTest {
 
         assertEquals(5.878, ComplexNumber.rectangular(7,-3).argument().orElse(-1.0), 0.01);
 
-        assertEquals(-1, ComplexNumber.rectangular(0,0).argument().orElse(-1.0));
+        assertEquals(-1.0 , ComplexNumber.rectangular(0,0).argument().orElse(-1.0), 0.001);
     }
 
 
