@@ -59,6 +59,8 @@ class MatrixTest {
             assertEquals(2, a.n());
             assertEquals(2, a.m());
             assertEquals(Vector.fromReals(1,2), a.getRow(1));
+            assertEquals(Vector.fromReals(3,4), a.getRow(2));
+            assertThrows(IllegalArgumentException.class, () -> a.getRow(3));
 
         }
         @Test

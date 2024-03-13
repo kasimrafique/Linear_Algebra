@@ -23,23 +23,18 @@ public class Matrix {
 
     public static Matrix fromRealsWithSize(int m, int n, double... values){
         if (values.length != m*n || m<1 || n<1) throw new IllegalArgumentException("Invalid amount of parameters");
-        ArrayList<Vector> rows = new ArrayList<>();
+        Vector[] rows = new Vector[m];
 
+        int a = 0;
         for (int i = 0; i < values.length; i=i+m){
-            ArrayList<Double> value = new ArrayList<>();
+            double[] value = new double[n];
            for (int j=i; j<i+n; j++) {
-               value.add(values[j]);
+               value[j-i] = values[j];
            }
-           rows.add(Vector.fromReals(value.stream().mapToDouble(q -> q).toArray()));
+           rows[a] = Vector.fromReals(value);
+           a++;
         }
-
-        Vector[] rows1 = new Vector[rows.size()];
-
-        for (int l=0; l<rows.size(); l++){
-            rows1[l]=rows.get(l);
-        }
-
-        return Matrix.fromRows(rows1);
+        return Matrix.fromRows(rows);
     }
 
     public Matrix transpose() {
