@@ -40,9 +40,27 @@ class MatrixTest {
             assertEquals(2, a.m());
             assertEquals(2, a.n());
             assertThrows(IllegalArgumentException.class, () -> a.getRow(0));
+
+            Matrix k = Matrix.fromRealsWithSize(2,2,1,0,0,1);
+            System.out.println(k);
         }
 
 
+        @Test
+        public void constructRealMatrixWithIncorrectParameters(){
+            assertThrows(IllegalArgumentException.class, () -> Matrix.fromRealsWithSize(1,2,1,3,4,5,6));
+            assertThrows(IllegalArgumentException.class, () -> Matrix.fromRealsWithSize(3,3, 1));
+            assertThrows(IllegalArgumentException.class, () -> Matrix.fromRealsWithSize(0,0));
+        }
+
+        @Test
+        public void constructRealMatrixJustAsParameters(){
+            Matrix a = Matrix.fromRealsWithSize(2,2,1,2,3,4);
+            assertEquals(2, a.n());
+            assertEquals(2, a.m());
+            assertEquals(Vector.fromReals(1,2), a.getRow(1));
+
+        }
         @Test
         public void givenARectangularMatrix_thenInstantiate() {
             Matrix a = Matrix.fromColumns(
@@ -60,7 +78,8 @@ class MatrixTest {
 
             assertEquals(3, a.m());
             assertEquals(2, a.n());
-            System.out.println(a.getRow(1));
+            assertThrows(IllegalArgumentException.class, () -> a.getRow(1000));
+            assertThrows(IllegalArgumentException.class, () -> a.getRow(-31));
         }
     }
 

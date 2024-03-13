@@ -33,6 +33,7 @@ public class Vector {
     }
 
     public ComplexNumber getComponent(int i) {
+        if (i<1 || i>components.size()) throw new IllegalArgumentException("Accessing out of bound component");
         return components.get(i - 1);
     }
 

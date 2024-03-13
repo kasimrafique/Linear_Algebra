@@ -1,5 +1,6 @@
 package LA;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Matrix {
@@ -18,6 +19,27 @@ public class Matrix {
 
     public static Matrix fromRows(Vector... rows) {
         return (new Matrix(rows)).transpose();
+    }
+
+    public static Matrix fromRealsWithSize(int m, int n, double... values){
+        if (values.length != m*n || m<1 || n<1) throw new IllegalArgumentException("Invalid amount of parameters");
+        ArrayList<Vector> rows = new ArrayList<>();
+
+        for (int i = 0; i < values.length; i=i+m){
+            ArrayList<Double> value = new ArrayList<>();
+           for (int j=i; j<i+n; j++) {
+               value.add(values[j]);
+           }
+           rows.add(Vector.fromReals(value.stream().mapToDouble(q -> q).toArray()));
+        }
+
+        Vector[] rows1 = new Vector[rows.size()];
+
+        for (int l=0; l<rows.size(); l++){
+            rows1[l]=rows.get(l);
+        }
+
+        return Matrix.fromRows(rows1);
     }
 
     public Matrix transpose() {
