@@ -39,6 +39,7 @@ class MatrixTest {
 
             assertEquals(2, a.m());
             assertEquals(2, a.n());
+            assertThrows(IllegalArgumentException.class, () -> a.getRow(0));
         }
 
 
@@ -59,6 +60,7 @@ class MatrixTest {
 
             assertEquals(3, a.m());
             assertEquals(2, a.n());
+            System.out.println(a.getRow(1));
         }
     }
 

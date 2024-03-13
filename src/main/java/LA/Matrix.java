@@ -33,6 +33,7 @@ public class Matrix {
     }
 
     public Vector getRow(int i) {
+        if (i<1 || i >m()) throw new IllegalArgumentException("Trying to get non-existent row");
        ComplexNumber[] components = new ComplexNumber[m()];
 
        for (int j = 0; j < m(); j++) {
