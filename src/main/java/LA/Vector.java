@@ -59,6 +59,8 @@ public class Vector {
     }
 
     /**
+     * 1 indexed position to get.
+     *
      * @param i The position to return
      * @return The ith component
      */
