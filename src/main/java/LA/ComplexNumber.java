@@ -60,23 +60,23 @@ public class ComplexNumber {
     }
 
 
-    //Returns the positive root of the complex number
+    // Returns the positive root of the complex number
     //        sqrt of imaginary number is imaginary
     //        https://www.cuemath.com/algebra/square-root-of-complex-number/
     public ComplexNumber sqrt(){
-        //handle all cases where b is 0
+        // Handle all cases where b is 0
         if ((bi == 0) && (a>=0)) return ComplexNumber.rectangular(Math.sqrt(a),0);
         if ((bi == 0) && (a<0)) return ComplexNumber.rectangular(0, Math.sqrt(-a));
 
-        //then use formula
         return ComplexNumber.rectangular(Math.sqrt(((this.modulus() + a)/2.0)),
                 (bi/Math.abs(bi))*Math.sqrt((this.modulus() - a)/2.0));
     }
 
-//    argument of complex number between 0 - 2Pi i.e. not negative
-    public Optional<Double> argument() {
-        if (a == 0 && bi == 0) return Optional.empty();
-        double r=0.0;
+    // Argument of complex number between 0 - 2Pi
+    // i.e. not negative
+    public Double argument() {
+        double r = 0.0;
+        if (a == 0 && bi == 0) r = 0.0;
         if (Math.round(a) == 0 && bi > 0) r = Math.PI / 2;
         if (Math.round(a) == 0 && bi < 0) r = 3 * Math.PI / 2;
         if (Math.round(a) > 0 && bi == 0) r = 0.0;
@@ -87,7 +87,7 @@ public class ComplexNumber {
         if (a > 0 && bi < 0) r = 2*Math.PI - Math.atan(-bi / a);
         if (a < 0 && bi < 0) r = Math.PI + Math.atan(bi/a);
 
-        return Optional.of(r);
+        return r;
     }
 
     public ComplexNumber additiveInverse(){

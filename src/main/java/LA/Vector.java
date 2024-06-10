@@ -61,4 +61,9 @@ public class Vector {
     public String toString() {
         return "LA.Vector{" + components + '}';
     }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(components);
+    }
 }

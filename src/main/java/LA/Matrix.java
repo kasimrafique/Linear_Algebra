@@ -25,9 +25,12 @@ public class Matrix {
         if (values.length != m*n || m<1 || n<1) throw new IllegalArgumentException("Invalid amount of parameters");
         Vector[] rows = new Vector[m];
 
+        // Index for each vector in rows
         int a = 0;
+        // Want to repeat for every row so i+m
         for (int i = 0; i < values.length; i=i+m){
             double[] value = new double[n];
+            // Want to copy all values in the row, length n
            for (int j=i; j<i+n; j++) {
                value[j-i] = values[j];
            }
@@ -84,5 +87,10 @@ public class Matrix {
         return "LA.Matrix{" +
                 "rows=" + Arrays.toString(getRows()) +
                 '}';
+    }
+
+    @Override
+    public int hashCode() {
+        return Arrays.hashCode(columns);
     }
 }

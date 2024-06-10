@@ -103,20 +103,20 @@ public class ComplexNumberTest {
     @Test
     public void whenInstantiatedInRectangularForm_thenHasCorrectArgument(){
         ComplexNumber z1 = ComplexNumber.rectangular(1, 1);
-        assertEquals(Math.PI / 4, z1.argument().orElseThrow(), 0.001);
+        assertEquals(Math.PI / 4, z1.argument(), 0.001);
 
         ComplexNumber z2 = ComplexNumber.rectangular(-1, 1);
-        assertEquals(3 * Math.PI / 4, z2.argument().orElse(-1.0), 0.001);
+        assertEquals(3 * Math.PI / 4, z2.argument(), 0.001);
 
         ComplexNumber z3 = ComplexNumber.polar(1, 3 * Math.PI / 2);
-        assertEquals(3 * Math.PI / 2, z3.argument().orElse(-1.0), 0.001);
+        assertEquals(3 * Math.PI / 2, z3.argument(), 0.001);
 
         ComplexNumber z4 = ComplexNumber.rectangular(-3, 4);
-        assertEquals(2.2143, z4.argument().orElse(-1.0), 0.001);
+        assertEquals(2.2143, z4.argument(), 0.001);
 
-        assertEquals(5.878, ComplexNumber.rectangular(7,-3).argument().orElse(-1.0), 0.01);
+        assertEquals(5.878, ComplexNumber.rectangular(7,-3).argument(), 0.01);
 
-        assertEquals(-1.0 , ComplexNumber.rectangular(0,0).argument().orElse(-1.0), 0.001);
+        assertEquals(0, ComplexNumber.rectangular(0,0).argument(), 0.001);
     }
 
 
