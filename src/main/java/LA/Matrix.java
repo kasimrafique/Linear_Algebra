@@ -1,14 +1,13 @@
 package LA;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Matrix {
     private final Vector[] columns;
 
     private Matrix(Vector... columns) {
-        boolean columnVectorsAllSameDimension = Arrays.stream(columns).map(Vector::dimension).distinct().count() == 1;
-        if (!columnVectorsAllSameDimension) throw new IllegalArgumentException("Column vectors must all be of same dimension.");
+        boolean columnVectorsAllSameDimension = Arrays.stream(columns).map(Vector::size).distinct().count() == 1;
+        if (!columnVectorsAllSameDimension) throw new IllegalArgumentException("Column vectors must all be of same size.");
 
         this.columns = columns;
     }
@@ -45,7 +44,7 @@ public class Matrix {
     }
 
     public int m() {
-        return columns[0].dimension();
+        return columns[0].size();
     }
 
     public int n() {

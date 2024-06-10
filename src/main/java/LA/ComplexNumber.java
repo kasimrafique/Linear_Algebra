@@ -100,7 +100,7 @@ public class ComplexNumber {
     }
 
     /**
-     * @return The modulus / norm of the complex number
+     * @return The modulus of the complex number
      */
     public double modulus() {
         return Math.sqrt(a * a + bi * bi);
