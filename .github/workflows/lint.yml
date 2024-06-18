@@ -1,0 +1,24 @@
+name: Linter
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+      
+jobs:
+  linter:
+    name: Java Linter
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+    
+      - name: Google Java format
+        uses: axel-op/googlejavaformat-action@v3.6.0
+        
+            
