@@ -122,4 +122,112 @@ public class ComplexNumberTest {
 
     assertEquals(0, ComplexNumber.rectangular(0, 0).argument(), 0.001);
   }
+
+  @Test
+  public void addComplexNumbers() {
+    assertEquals(ComplexNumber.rectangular(5,10), ComplexNumber.rectangular(3,9)
+            .add(ComplexNumber.rectangular(2,1)));
+    assertEquals(ComplexNumber.rectangular(5,10), ComplexNumber.rectangular(9,9)
+            .add(ComplexNumber.rectangular(-4,1)));
+    assertEquals(ComplexNumber.rectangular(5,10), ComplexNumber.ADDITIVE_IDENTITY
+            .add(ComplexNumber.rectangular(5,10)));
+    assertEquals(ComplexNumber.rectangular(6,12), ComplexNumber.ADDITIVE_IDENTITY
+            .add(ComplexNumber.rectangular(1,2))
+            .add(ComplexNumber.rectangular(2,4))
+            .add(ComplexNumber.rectangular(3,6)));
+  }
+  @Test
+  public void subtractComplexNumbers() {
+    assertEquals(ComplexNumber.rectangular(1,8), ComplexNumber.rectangular(3,9)
+            .subtract(ComplexNumber.rectangular(2,1)));
+    assertEquals(ComplexNumber.rectangular(13,8), ComplexNumber.rectangular(9,9)
+            .subtract(ComplexNumber.rectangular(-4,1)));
+    assertEquals(ComplexNumber.rectangular(-5,-10), ComplexNumber.ADDITIVE_IDENTITY
+            .subtract(ComplexNumber.rectangular(5,10)));
+    assertEquals(ComplexNumber.rectangular(-6,-12), ComplexNumber.ADDITIVE_IDENTITY
+            .subtract(ComplexNumber.rectangular(1,2))
+            .subtract(ComplexNumber.rectangular(2,4))
+            .subtract(ComplexNumber.rectangular(3,6)));
+
+    // Mix of both
+    assertEquals(ComplexNumber.rectangular(-2,-4), ComplexNumber.ADDITIVE_IDENTITY
+            .subtract(ComplexNumber.rectangular(1,2))
+            .add(ComplexNumber.rectangular(2,4))
+            .subtract(ComplexNumber.rectangular(3,6)));
+  }
+
+  @Test
+  public void testMultiplyComplexNumbers() {
+    // Test Case 1: (1 + 8i) * (3 + 9i)
+    assertEquals(ComplexNumber.rectangular(-69, 33),
+            ComplexNumber.rectangular(1, 8)
+                    .multiply(ComplexNumber.rectangular(3, 9)));
+
+    // Test Case 2: (9 + 9i) * (-4 + 1i)
+    assertEquals(ComplexNumber.rectangular(-45, -27),
+            ComplexNumber.rectangular(9, 9)
+                    .multiply(ComplexNumber.rectangular(-4, 1)));
+
+    // Test Case 3: 0 * (5 + 10i)
+    assertEquals(ComplexNumber.ADDITIVE_IDENTITY,
+            ComplexNumber.ADDITIVE_IDENTITY
+                    .multiply(ComplexNumber.rectangular(5, 10)));
+
+    // Test Case 4: (1 + 2i) * (2 + 4i) * (3 + 6i)
+    assertEquals(ComplexNumber.rectangular(-66, -12),
+            ComplexNumber.rectangular(1, 2)
+                    .multiply(ComplexNumber.rectangular(2, 4))
+                    .multiply(ComplexNumber.rectangular(3, 6)));
+  }
+
+  @Test
+  public void testRealScalarMultiply() {
+    // Test Case 1: (1 + 8i) * 2
+    assertEquals(ComplexNumber.rectangular(2, 16),
+            ComplexNumber.rectangular(1, 8)
+                    .realScalarMultiply(2));
+
+    // Test Case 2: (9 + 9i) * -1
+    assertEquals(ComplexNumber.rectangular(-9, -9),
+            ComplexNumber.rectangular(9, 9)
+                    .realScalarMultiply(-1));
+
+    // Test Case 3: (5 + 10i) * 0
+    assertEquals(ComplexNumber.ADDITIVE_IDENTITY,
+            ComplexNumber.rectangular(5, 10)
+                    .realScalarMultiply(0));
+
+    // Test Case 4: (1 + 2i) * 3
+    assertEquals(ComplexNumber.rectangular(3, 6),
+            ComplexNumber.rectangular(1, 2)
+                    .realScalarMultiply(3));
+  }
+
+  @Test
+  public void testDivide() {
+    // Test Case 1: (1 + 8i) / (3 + 9i)
+    assertEquals(ComplexNumber.rectangular(5.0/6, 1.0/6),
+            ComplexNumber.rectangular(1, 8)
+                    .divide(ComplexNumber.rectangular(3, 9)));
+
+    // Test Case 2: (5 + 10i) / (1 + 0i)
+    assertEquals(ComplexNumber.rectangular(5, 10),
+            ComplexNumber.rectangular(5, 10)
+                    .divide(ComplexNumber.rectangular(1, 0)));
+
+    // Test Case 3: (1 + 2i) / (2 + 4i)
+    assertEquals(ComplexNumber.rectangular(0.5, 0),
+            ComplexNumber.rectangular(1, 2)
+                    .divide(ComplexNumber.rectangular(2, 4)));
+
+    // Test Case 4: (4 + 2i) / (2 + 1i)
+    assertEquals(ComplexNumber.rectangular(2, 0),
+            ComplexNumber.rectangular(4, 2)
+                    .divide(ComplexNumber.rectangular(2, 1)));
+
+    // Test Case 5: (10 + 5i) / (2 + 1i)
+    assertEquals(ComplexNumber.rectangular(5, 0),
+            ComplexNumber.rectangular(10, 5)
+                    .divide(ComplexNumber.rectangular(2, 1)));
+  }
 }
