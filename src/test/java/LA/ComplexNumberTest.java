@@ -1,5 +1,6 @@
 package LA;
 
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -99,11 +100,40 @@ public class ComplexNumberTest {
     assert (ComplexNumber.rectangular(4, 6).equals(ComplexNumber.sum(z1, z3)));
     assert (ComplexNumber.rectangular(4, 6).equals(ComplexNumber.sum(z1, z3, ComplexNumber.ZERO)));
     assert (ComplexNumber.ZERO.equals(ComplexNumber.sum(ComplexNumber.ZERO)));
-    // TO DO more tests
   }
+  @Nested
+  class MultiplicativeInverse {
+    @Test
+    void multiplicativeInverse_realNumber() {
+      ComplexNumber z = ComplexNumber.rectangular(2, 0); // Complex number 2
+      ComplexNumber result = z.multiplicativeInverse().orElseThrow();
 
-  @Test
-  public void testMultiplicativeInverse() {}
+      assertEquals(ComplexNumber.rectangular(0.5, 0), result);
+    }
+
+    @Test
+    void multiplicativeInverse_complexNumber() {
+      ComplexNumber z = ComplexNumber.rectangular(1, 2); // Complex number 1 + 2i
+      ComplexNumber result = z.multiplicativeInverse().orElseThrow();
+
+      assertEquals(ComplexNumber.rectangular(0.2, -0.4), result); // Expected: 1/(1+2i) = (1/5) - (2/5)i
+    }
+
+    @Test
+    void multiplicativeInverse_zero() {
+      ComplexNumber z = ComplexNumber.rectangular(0, 0); // Complex number 0
+
+      assertThrows(IllegalArgumentException.class, z::multiplicativeInverse);
+    }
+
+    @Test
+    void multiplicativeInverse_largeNumbers() {
+      ComplexNumber z = ComplexNumber.rectangular(100, -200); // Complex number 100 - 200i
+      ComplexNumber result = z.multiplicativeInverse().orElseThrow();
+
+      assertEquals(ComplexNumber.rectangular(0.002, 0.004), result); // Expected: 1/(100-200i) = 0.002 + 0.004i
+    }
+  }
 
   @Test
   public void whenInstantiatedInRectangularForm_thenHasCorrectArgument() {
