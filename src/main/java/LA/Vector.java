@@ -71,8 +71,8 @@ public class Vector {
     int size = v1.size();
     ComplexNumber[] result = new ComplexNumber[size];
 
-    for (int i=0; i < size; i++) {
-      result[i] = v1.getComponent(i+1).add(v2.getComponent(i+1));
+    for (int i = 0; i < size; i++) {
+      result[i] = v1.getComponent(i + 1).add(v2.getComponent(i + 1));
     }
 
     return new Vector(result);

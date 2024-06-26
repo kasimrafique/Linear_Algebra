@@ -211,9 +211,10 @@ public class ComplexNumber {
    * @return The result
    */
   public ComplexNumber divide(ComplexNumber z) {
-    return this.multiply(z.multiplicativeInverse().orElseThrow(() -> new IllegalArgumentException("Illegal division")));
+    return this.multiply(
+        z.multiplicativeInverse()
+            .orElseThrow(() -> new IllegalArgumentException("Illegal division")));
   }
-
 
   @Override
   public boolean equals(Object o) {

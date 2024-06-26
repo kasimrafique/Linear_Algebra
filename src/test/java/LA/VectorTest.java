@@ -33,6 +33,7 @@ class VectorTest {
 
       assertEquals(ComplexNumber.rectangular(37, 39), Vector.innerProduct(v1, v2));
     }
+
     @Test
     void givenTwoRealVectors_thenReturnTheirDotProduct1() {
       var v1 = new Vector(ComplexNumber.rectangular(2, 0), ComplexNumber.rectangular(6, 0));
@@ -105,7 +106,8 @@ class VectorTest {
     void addVectors_realVectors_sumOfRealParts() {
       Vector v1 = new Vector(ComplexNumber.rectangular(2, 0), ComplexNumber.rectangular(6, 0));
       Vector v2 = new Vector(ComplexNumber.rectangular(4, 0), ComplexNumber.rectangular(1, 0));
-      Vector expected = new Vector(ComplexNumber.rectangular(6, 0), ComplexNumber.rectangular(7, 0));
+      Vector expected =
+          new Vector(ComplexNumber.rectangular(6, 0), ComplexNumber.rectangular(7, 0));
       assertEquals(expected, Vector.addVectors(v1, v2));
     }
 
@@ -113,16 +115,19 @@ class VectorTest {
     void addVectors_complexVectors_sumOfComplexParts() {
       Vector v1 = new Vector(ComplexNumber.rectangular(1, 2), ComplexNumber.rectangular(3, 4));
       Vector v2 = new Vector(ComplexNumber.rectangular(5, 6), ComplexNumber.rectangular(7, 8));
-      Vector expected = new Vector(ComplexNumber.rectangular(6, 8), ComplexNumber.rectangular(10, 12));
+      Vector expected =
+          new Vector(ComplexNumber.rectangular(6, 8), ComplexNumber.rectangular(10, 12));
       assertEquals(expected, Vector.addVectors(v1, v2));
     }
 
     @Test
     void addVectors_vectorAndZeroVector_originalVector() {
       Vector v1 = new Vector(ComplexNumber.rectangular(1, 2), ComplexNumber.rectangular(3, 4));
-      Vector zeroVector = new Vector(ComplexNumber.rectangular(0, 0), ComplexNumber.rectangular(0, 0));
+      Vector zeroVector =
+          new Vector(ComplexNumber.rectangular(0, 0), ComplexNumber.rectangular(0, 0));
       assertEquals(v1, Vector.addVectors(v1, zeroVector));
     }
+
     @Test
     void addVectors_shouldHandleVectorWithNegativeComponents() {
       Vector v1 = new Vector(ComplexNumber.rectangular(-2, -3), ComplexNumber.rectangular(-4, -5));
@@ -143,8 +148,10 @@ class VectorTest {
 
     @Test
     void addVectors_shouldHandleLargeComplexNumbers() {
-      Vector v1 = new Vector(ComplexNumber.rectangular(1000, 2000), ComplexNumber.rectangular(-3000, 4000));
-      Vector v2 = new Vector(ComplexNumber.rectangular(5000, -6000), ComplexNumber.rectangular(7000, 8000));
+      Vector v1 =
+          new Vector(ComplexNumber.rectangular(1000, 2000), ComplexNumber.rectangular(-3000, 4000));
+      Vector v2 =
+          new Vector(ComplexNumber.rectangular(5000, -6000), ComplexNumber.rectangular(7000, 8000));
       Vector result = Vector.addVectors(v1, v2);
 
       assertEquals(ComplexNumber.rectangular(6000, -4000), result.getComponent(1));
@@ -154,7 +161,8 @@ class VectorTest {
     @Test
     void addVectors_shouldHandleVectorAdditionWithZeroVectors() {
       Vector v1 = new Vector(ComplexNumber.rectangular(1, 2), ComplexNumber.rectangular(3, 4));
-      Vector zeroVector = new Vector(ComplexNumber.rectangular(0, 0), ComplexNumber.rectangular(0, 0));
+      Vector zeroVector =
+          new Vector(ComplexNumber.rectangular(0, 0), ComplexNumber.rectangular(0, 0));
       Vector result1 = Vector.addVectors(v1, zeroVector);
       Vector result2 = Vector.addVectors(zeroVector, v1); // Test commutativity
 
