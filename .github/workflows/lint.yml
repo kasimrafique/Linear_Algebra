@@ -5,6 +5,7 @@ on:
   push:
     branches:
       - main
+    paths: [src/**]
   pull_request:
     branches:
       - main
@@ -13,6 +14,8 @@ jobs:
   linter:
     name: Java Linter
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps:
       - name: Checkout code

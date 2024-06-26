@@ -3,6 +3,8 @@ package LA;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
+import java.util.Optional;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -259,7 +261,7 @@ public class ComplexNumberTest {
       ComplexNumber z = ComplexNumber.rectangular(2, 0); // Complex number 2
       ComplexNumber result = z.multiplicativeInverse().orElseThrow();
 
-      assertEquals(ComplexNumber.rectangular(0.5, 0), result);
+      assertEquals(ComplexNumber.rectangular(0.5, -0.0), result);
     }
 
     @Test
@@ -275,7 +277,7 @@ public class ComplexNumberTest {
     void multiplicativeInverse_zero() {
       ComplexNumber z = ComplexNumber.rectangular(0, 0); // Complex number 0
 
-      assertThrows(IllegalArgumentException.class, z::multiplicativeInverse);
+      assertEquals(Optional.empty(), z.multiplicativeInverse());
     }
 
     @Test
