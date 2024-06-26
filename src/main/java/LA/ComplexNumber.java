@@ -164,6 +164,57 @@ public class ComplexNumber {
         ComplexNumber.rectangular(a / (a * a + bi * bi), -1 * bi / (a * a + bi * bi)));
   }
 
+  /**
+   * Add a complex number returning the result.
+   *
+   * @param z The complex number to add
+   * @return The result
+   */
+  public ComplexNumber add(ComplexNumber z) {
+    return new ComplexNumber(this.a + z.a, this.bi + z.bi);
+  }
+
+  /**
+   * Subtract a complex number returning the result.
+   *
+   * @param z The complex number to subtract
+   * @return The result
+   */
+  public ComplexNumber subtract(ComplexNumber z) {
+    return new ComplexNumber(this.a - z.a, this.bi - z.bi);
+  }
+
+  /**
+   * Multiply a complex number returning the result.
+   *
+   * @param z The complex number to multiply
+   * @return The result
+   */
+  public ComplexNumber multiply(ComplexNumber z) {
+    return new ComplexNumber(this.a * z.a - this.bi * z.bi, this.a * z.bi + this.bi * z.a);
+  }
+
+  /**
+   * Multiply the complex number by a real scalar.
+   *
+   * @param scalar The scalar to multiply by
+   * @return The result
+   */
+  public ComplexNumber realScalarMultiply(double scalar) {
+    return new ComplexNumber(this.a * scalar, this.bi * scalar);
+  }
+
+  /**
+   * Divide the complex number returning the result.
+   *
+   * @param z The complex number to divide by
+   * @return The result
+   */
+  public ComplexNumber divide(ComplexNumber z) {
+    return this.multiply(z.multiplicativeInverse().orElseThrow(() -> new IllegalArgumentException("Illegal division")));
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
