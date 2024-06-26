@@ -33,6 +33,50 @@ class VectorTest {
 
       assertEquals(ComplexNumber.rectangular(37, 39), Vector.innerProduct(v1, v2));
     }
+    @Test
+    void givenTwoRealVectors_thenReturnTheirDotProduct1() {
+      var v1 = new Vector(ComplexNumber.rectangular(2, 0), ComplexNumber.rectangular(6, 0));
+      var v2 = new Vector(ComplexNumber.rectangular(4, 0), ComplexNumber.rectangular(1, 0));
+
+      assertEquals(ComplexNumber.rectangular(14, 0), Vector.innerProduct(v1, v2));
+    }
+
+    @Test
+    void givenTwoComplexVectors_thenReturnTheirDotProduct() {
+      var v11 = ComplexNumber.rectangular(0, 2);
+      var v12 = ComplexNumber.rectangular(3, 4);
+      var v21 = ComplexNumber.rectangular(5, 6);
+      var v22 = ComplexNumber.rectangular(7, 8);
+      var v1 = new Vector(v11, v12);
+      var v2 = new Vector(v21, v22);
+
+      assertEquals(ComplexNumber.rectangular(65, -14), Vector.innerProduct(v1, v2));
+    }
+
+    @Test
+    void givenTwoIdenticalVectors_thenReturnSumOfSquares() {
+      var v1 = new Vector(ComplexNumber.rectangular(2, 3), ComplexNumber.rectangular(4, 5));
+
+      // (2-3i)*(2+3i) + (4-5i)*(4+5i) = 54
+      assertEquals(ComplexNumber.real(54), Vector.innerProduct(v1, v1));
+    }
+
+    @Test
+    void givenZeroVectors_thenReturnZero() {
+      var v1 = new Vector(ComplexNumber.rectangular(0, 0), ComplexNumber.rectangular(0, 0));
+      var v2 = new Vector(ComplexNumber.rectangular(0, 0), ComplexNumber.rectangular(0, 0));
+
+      assertEquals(ComplexNumber.rectangular(0, 0), Vector.innerProduct(v1, v2));
+    }
+
+    @Test
+    void givenOrthogonalVectors_thenReturnZero() {
+      var v1 = new Vector(ComplexNumber.rectangular(1, 0), ComplexNumber.rectangular(0, 1));
+      var v2 = new Vector(ComplexNumber.rectangular(0, 1), ComplexNumber.rectangular(1, 0));
+
+      // (1+0i)*(0+1i) + (0+1i)*(1+0i) = (0+i) + (i+0) = 0+0i
+      assertEquals(ComplexNumber.rectangular(0, 0), Vector.innerProduct(v1, v2));
+    }
   }
 
   @Test
