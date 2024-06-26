@@ -58,6 +58,27 @@ public class Vector {
   }
 
   /**
+   * Add 2 vectors that are the same size together.
+   *
+   * @param v1 First Vector
+   * @param v2 Second Vector
+   * @return The result
+   */
+  public static Vector addVectors(Vector v1, Vector v2) {
+    if (v1.size() != v2.size())
+      throw new IllegalArgumentException("Vectors must have the same number of components");
+
+    int size = v1.size();
+    ComplexNumber[] result = new ComplexNumber[size];
+
+    for (int i=0; i < size; i++) {
+      result[i] = v1.getComponent(i+1).add(v2.getComponent(i+1));
+    }
+
+    return new Vector(result);
+  }
+
+  /**
    * 1 indexed position to get.
    *
    * @param i The position to return

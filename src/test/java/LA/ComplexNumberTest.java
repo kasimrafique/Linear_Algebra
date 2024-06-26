@@ -3,6 +3,7 @@ package LA;
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ComplexNumberTest {
 
@@ -229,5 +230,7 @@ public class ComplexNumberTest {
     assertEquals(ComplexNumber.rectangular(5, 0),
             ComplexNumber.rectangular(10, 5)
                     .divide(ComplexNumber.rectangular(2, 1)));
+
+    assertThrows(IllegalArgumentException.class, () -> ComplexNumber.real(1).divide(ComplexNumber.ADDITIVE_IDENTITY));
   }
 }

@@ -153,7 +153,7 @@ public class ComplexNumber {
 
   /**
    * Calculates the multiplicative inverse for the complex number. Note that {@link #ZERO} does not
-   * have an inverse.
+   * have an inverse. i.e. provides the rationalized form of the current complex number.
    *
    * @return Empty if {@link #ZERO} or an optional of the multiplicative inverse
    */
